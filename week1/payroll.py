@@ -3,8 +3,7 @@ class Employee():
     fName = str(input("Enter The Employee's First Name: "))
     lName = str(input("Enter The Employee's Last Name: "))
     hourlyWage = float(input("Enter The Employee's Hourly Wage: "))
-    hoursWorked = float(input("How many hours did " +
-                        fName + " " + lName + " work this week? "))
+    hoursWorked = float(input("How many hours did " + fName + " " + lName + " work this week? "))
 
     def pay(employeeId, fName, lName, hourlyWage, hoursWorked):
         paycheck = str((float(hoursWorked)) * float(hourlyWage))
@@ -20,5 +19,4 @@ class Employee():
             print(fName + " " + lName + "'s paycheck amount is $" + bonusPay)
 
 
-Employee.pay(Employee.employeeId, Employee.fName, Employee.lName,
-             Employee.hourlyWage, Employee.hoursWorked)
+Employee.pay(Employee.employeeId, Employee.fName, Employee.lName, Employee.hourlyWage, Employee.hoursWorked)
