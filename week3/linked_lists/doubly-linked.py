@@ -3,10 +3,12 @@ class Node:
         self.data = data
         self.next = None
         self.prev = None
+
+
 class DoublyLinkedList:
     def __init__(self):
-        self.tail = None
         self.head = None
+        self.tail = None
         self.count = 0
 
     def iter(self):
@@ -20,25 +22,85 @@ class DoublyLinkedList:
         return self.count
 
     def addFirst(self, data) -> None:
+        self.count += 1
         node = Node(data)
         node.next = self.head
         self.head.prev = node
         self.head = node
         node.prev = None
-        self.count += 1
 
     def addLast(self, data) -> None:
         node = Node(data)
-        self.tail.prev = node
-        self.tail = node
-        node.next = None
-        self.count += 1
+        if not self.head:
+            self.head = node
+            self.tail = node
+        else:
+            self.tail.next = node
+            node.prev = self.tail  
+            self.tail = node
+        self.count += 1        
 
-    # def addAtIndex(self, data, index):
+    def addAtIndex(self, data, index):
+        # Add a node to the list at the given index position
+        # If index equals to the length of linked list, the node will be appended to the end of linked list
+        # If index is greater than the length, the data will not be inserted.
+        # This function does not replace the data at the index, but pushes everything else down.
         node = Node(data)
-        
-    # def indexOf(self, data):
+        if index > self.count:
+            return
+        if (index == self.count):
+            self.addLast(data)
+            return
+        if index == 0:
+            self.addFirst(data)
+            return
+        curr = self.head
+        prev = self.head
+        for n in range(index):
+            prev = curr
+            curr = curr.next
+        node = Node(data)
+        prev.next = node
+        node.prev = prev
+        node.next = curr
+        curr.prev = node
+        self.count += 1
+        return
+    
+    def replace(self, data, temp):
+        index = self.indexOf(temp)
+        node = Node(data)
+        if (index > (self.count - 1)):
+            return
+        if (index == (self.count -1)):
+            self.addLast(data)
+            return
+        if index == 0:
+            self.addFirst(data)
+            return
+        curr = self.head
+        prev = self.head
+        for n in range(index):
+            prev = curr
+            curr = curr.next        
+        prev.next = node
+        node.prev = prev
+        node.next = curr
+        curr.prev = node
+        next = curr.next
+        curr = curr.prev
+        curr.next = next
+        return
 
+    def indexOf(self, data):
+        curr = self.head
+        index = 0
+        while curr.next != None:
+            if(curr.data == data):
+                return index             
+            index += 1 
+            curr = curr.next
+            
     def add(self, data) -> None:
         # Append an item to the end of the list
         self.addLast(data)
@@ -107,3 +169,18 @@ class DoublyLinkedList:
         for node in self.iter():
             myStr += str(node) + " "
         return myStr
+
+
+items = DoublyLinkedList()
+items.add("May")
+items.add("the")
+items.add("Force")
+items.add("be")
+items.add("with")
+items.add("you")
+items.add("!")
+print(items)
+print(items.indexOf("with"))
+items.addAtIndex("all", 6)
+items.replace("us", "you")
+print(items)
