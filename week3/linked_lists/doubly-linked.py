@@ -70,7 +70,7 @@ class DoublyLinkedList:
     def replace(self, data, temp):
         index = self.indexOf(temp)
         node = Node(data)
-        if (index > (self.count - 1)):
+        if (index > (self.count -1)):
             return
         if (index == (self.count -1)):
             self.addLast(data)
