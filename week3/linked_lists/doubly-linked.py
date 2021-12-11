@@ -4,7 +4,6 @@ class Node:
         self.next = None
         self.prev = None
 
-
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
@@ -169,7 +168,6 @@ class DoublyLinkedList:
         for node in self.iter():
             myStr += str(node) + " "
         return myStr
-
 
 items = DoublyLinkedList()
 items.add("May")
