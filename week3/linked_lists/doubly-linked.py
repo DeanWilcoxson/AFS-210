@@ -36,9 +36,9 @@ class DoublyLinkedList:
             self.tail = node
         else:
             self.tail.next = node
-            node.prev = self.tail  
+            node.prev = self.tail
             self.tail = node
-        self.count += 1        
+        self.count += 1
 
     def addAtIndex(self, data, index):
         # Add a node to the list at the given index position
@@ -66,13 +66,13 @@ class DoublyLinkedList:
         curr.prev = node
         self.count += 1
         return
-    
+
     def replace(self, data, temp):
         index = self.indexOf(temp)
         node = Node(data)
-        if (index > (self.count -1)):
+        if (index > (self.count - 1)):
             return
-        if (index == (self.count -1)):
+        if (index == (self.count - 1)):
             self.addLast(data)
             return
         if index == 0:
@@ -82,7 +82,7 @@ class DoublyLinkedList:
         prev = self.head
         for n in range(index):
             prev = curr
-            curr = curr.next        
+            curr = curr.next
         prev.next = node
         node.prev = prev
         node.next = curr
@@ -97,10 +97,10 @@ class DoublyLinkedList:
         index = 0
         while curr.next != None:
             if(curr.data == data):
-                return index             
-            index += 1 
+                return index
+            index += 1
             curr = curr.next
-            
+
     def add(self, data) -> None:
         # Append an item to the end of the list
         self.addLast(data)
