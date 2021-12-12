@@ -4,7 +4,6 @@ class Node:
         self.next = None
         self.prev = None
 
-
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
@@ -25,7 +24,10 @@ class DoublyLinkedList:
         self.count += 1
         node = Node(data)
         node.next = self.head
-        self.head.prev = node
+        if (self.head):
+            self.head.prev = node
+        if (not self.tail):
+            self.tail = node
         self.head = node
         node.prev = None
 
@@ -47,11 +49,12 @@ class DoublyLinkedList:
         # This function does not replace the data at the index, but pushes everything else down.
         node = Node(data)
         if index > self.count:
+            print(index)
             return
         if (index == self.count):
             self.addLast(data)
             return
-        if index == 0:
+        if index <= 0:
             self.addFirst(data)
             return
         curr = self.head
@@ -69,27 +72,12 @@ class DoublyLinkedList:
     
     def replace(self, data, temp):
         index = self.indexOf(temp)
-        node = Node(data)
         if (index > (self.count -1)):
             return
-        if (index == (self.count -1)):
-            self.addLast(data)
-            return
-        if index == 0:
-            self.addFirst(data)
-            return
-        curr = self.head
-        prev = self.head
+        current = self.head
         for n in range(index):
-            prev = curr
-            curr = curr.next        
-        prev.next = node
-        node.prev = prev
-        node.next = curr
-        curr.prev = node
-        next = curr.next
-        curr = curr.prev
-        curr.next = next
+            current = current.next
+        current.data = data
         return
 
     def indexOf(self, data):
@@ -97,10 +85,11 @@ class DoublyLinkedList:
         index = 0
         while curr.next != None:
             if(curr.data == data):
-                return index             
+                return index
             index += 1 
             curr = curr.next
-            
+        return index   
+     
     def add(self, data) -> None:
         # Append an item to the end of the list
         self.addLast(data)
@@ -170,9 +159,8 @@ class DoublyLinkedList:
             myStr += str(node) + " "
         return myStr
 
-
 items = DoublyLinkedList()
-items.add("May")
+items.addFirst("May")
 items.add("the")
 items.add("Force")
 items.add("be")
@@ -181,6 +169,6 @@ items.add("you")
 items.add("!")
 print(items)
 print(items.indexOf("with"))
-items.addAtIndex("all", 6)
+items.addAtIndex("all", items.indexOf("!"))
 items.replace("us", "you")
 print(items)

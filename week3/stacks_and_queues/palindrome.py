@@ -72,9 +72,30 @@ class Queue:
             self.head = self.head.next
             self.head.prev = None
             self.count -= 1
-        
-# def isPalindrome(str):
-# racecar = isPalindrome("racecar")
-# noon = isPalindrome("noon")
-# python = isPalindrome("python")
-# madam = isPalindrome("madam")
+
+    def getSize(self):
+        return self.size
+
+    def isEmpty(self):
+        if(self.size == 0):
+            return True
+        else:
+            return False
+
+    def peek(self):
+        if self.top:
+            return self.top.data
+        else:
+            return None
+
+def isPalindrome(str):
+    if(str == str[::-1]):
+        print(True)
+    else:
+        print(False)
+    
+    
+racecar = isPalindrome("racecar")
+noon = isPalindrome("noon")
+python = isPalindrome("python")
+madam = isPalindrome("madam")
