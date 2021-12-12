@@ -4,6 +4,7 @@ class Node:
         self.next = None
         self.prev = None
 
+
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
@@ -38,9 +39,9 @@ class DoublyLinkedList:
             self.tail = node
         else:
             self.tail.next = node
-            node.prev = self.tail  
+            node.prev = self.tail
             self.tail = node
-        self.count += 1        
+        self.count += 1
 
     def addAtIndex(self, data, index):
         # Add a node to the list at the given index position
@@ -69,10 +70,10 @@ class DoublyLinkedList:
         curr.prev = node
         self.count += 1
         return
-    
+
     def replace(self, data, temp):
         index = self.indexOf(temp)
-        if (index > (self.count -1)):
+        if (index > (self.count - 1)):
             return
         current = self.head
         for n in range(index):
@@ -83,13 +84,13 @@ class DoublyLinkedList:
     def indexOf(self, data):
         curr = self.head
         index = 0
-        while curr.next != None:
+        while curr != None:
             if(curr.data == data):
                 return index
-            index += 1 
+            index += 1
             curr = curr.next
-        return index   
-     
+        return -1
+
     def add(self, data) -> None:
         # Append an item to the end of the list
         self.addLast(data)
@@ -159,6 +160,7 @@ class DoublyLinkedList:
             myStr += str(node) + " "
         return myStr
 
+
 items = DoublyLinkedList()
 items.addFirst("May")
 items.add("the")
@@ -172,3 +174,5 @@ print(items.indexOf("with"))
 items.addAtIndex("all", items.indexOf("!"))
 items.replace("us", "you")
 print(items)
+
+print(items.indexOf("blah"))
