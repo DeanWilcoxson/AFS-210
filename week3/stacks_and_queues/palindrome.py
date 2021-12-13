@@ -43,7 +43,7 @@ class Queue:
 
     def peek(self):
         if(len(self.queue) > 0):
-          return self.queue[-1]
+            return self.queue[-1]
         else:
             return None
 
@@ -53,15 +53,10 @@ def isPalindrome(str):
     for ch in str:
         stack.push(ch)
         queue.enqueue(ch)
-        if(stack.isEmpty() != True):
-            for x in stack.stack:
-                stackLetter = stack.peek()
-                queueLetter = queue.peek()
-                if(stackLetter == queueLetter):
-                    stack.pop()
-                    queue.dequeue()
-                else:
-                    return False
+    if(stack.isEmpty() != True):
+        for _ in range(int(len(str)/2)):
+            if(stack.pop() != queue.dequeue()):
+                return False
         return True
 
 print(isPalindrome("racecar"))
