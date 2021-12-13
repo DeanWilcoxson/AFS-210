@@ -21,7 +21,6 @@ class Stack:
     def peek(self):
         return self.stack[0]
 
-
 class Queue:
     def __init__(self):
         self.queue = []
@@ -47,7 +46,6 @@ class Queue:
           return self.queue[-1]
         else:
             return None
-        # return self.queue[0]
 
 def isPalindrome(str):
     stack = Stack()
