@@ -21,6 +21,7 @@ class Stack:
     def peek(self):
         return self.stack[0]
 
+
 class Queue:
     def __init__(self):
         self.queue = []
@@ -36,16 +37,17 @@ class Queue:
         return len(self.queue)
 
     def isEmpty(self):
-        if(len(self.queue) == 0):
+        if(len(self.queue) < 1):
             return True
         else:
             return False
 
     def peek(self):
-        if self.head:
-            return self.head.data
+        if(len(self.queue) > 0):
+          return self.queue[-1]
         else:
             return None
+        # return self.queue[0]
 
 def isPalindrome(str):
     stack = Stack()
@@ -55,12 +57,14 @@ def isPalindrome(str):
         queue.enqueue(ch)
         if(stack.isEmpty() != True):
             for x in stack.stack:
-                stackLetter = stack.pop()
-                queueLetter = queue.dequeue()
+                stackLetter = stack.peek()
+                queueLetter = queue.peek()
                 if(stackLetter == queueLetter):
-                    return True
+                    stack.pop()
+                    queue.dequeue()
                 else:
                     return False
+        return True
 
 print(isPalindrome("racecar"))
 print(isPalindrome("noon"))
