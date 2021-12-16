@@ -1,25 +1,24 @@
-graph = {
-    "A": ["B","C","D","E","F"],
-    "B": ["C","E"],
-    "C": ["D"],
-    "D": ["E"],
-    "E": ["F"],
-    "F": ["C","G","H"],
-    "G": ["H","F"],
-    "H": ["F","G"],
-    "I": [],
-}
+graph = dict()
+graph["A"] = {"B": 2, "C": 1, "D": 3, "E": 9, "F": 20}
+graph["B"] = {"C": 4, "E": 3}
+graph["C"] = {"D": 8}
+graph["D"] = {"E": 7}
+graph["E"] = {"F": 5}
+graph["F"] = {"C": 2, "G": 2, "H": 2}
+graph["G"] = {"F": 1, "H": 6}
+graph["H"] = {"F": 9, "G": 8}
+graph["I"] = {}
 # finds shortest path between 2 nodes of a graph using BFS
+
+
 def breadth_first_search(graph, start, goal):
     # keep track of explored nodes
     explored = []
     # keep track of all the paths to be checked
     queue = [[start]]
-
     # return path if start is goal
     if start == goal:
         return "That was easy! Start = goal"
-
     # keeps looping until all possible paths have been checked
     while queue:
         # pop the first path from the queue
@@ -37,29 +36,31 @@ def breadth_first_search(graph, start, goal):
                 # return path if neighbor is goal
                 if neighbor == goal:
                     return new_path
-
             # mark node as explored
             explored.append(node)
-
     # in case there's no path between the 2 nodes
     return "Route Not Possible"
 
-print(breadth_first_search(graph,'A','H'))
+
+print(breadth_first_search(graph, "A", "H"))
+
 
 def dijsktra(graph, initial, end):
     # shortest paths is a dict of nodes
     # whose value is a tuple of (previous node, weight)
     shortest_paths = {initial: (None, 0)}
+    pathCost = 0
     current_node = initial
     visited = set()
-
     while current_node != end:
         visited.add(current_node)
         destinations = graph[current_node]
         weight_to_current_node = shortest_paths[current_node][1]
-
         for next_node in destinations:
             weight = graph[current_node][next_node] + weight_to_current_node
+            if weight:
+                pathCost += weight
+                return pathCost
             if next_node not in shortest_paths:
                 shortest_paths[next_node] = (current_node, weight)
             else:
@@ -83,6 +84,7 @@ def dijsktra(graph, initial, end):
         current_node = next_node
     # Reverse path
     path = path[::-1]
-    return path
+    return (path, pathCost)
 
-# print(dijsktra())
+
+print(dijsktra(graph, "A", "H"))
