@@ -2,9 +2,8 @@ class HashItem:
     def __init__(self, key, value):
         self.key = key
         self.value = value
-        
 class HashTable:
-    def __init__(self):
+    def __init__(self) -> None:
         self.size = 10
         self.slots = [None] * self.size
         self.count = 0
@@ -39,7 +38,8 @@ class HashTable:
         if self.slots[hash_key] is None:
             self.count += 1
         self.slots[hash_key] = item
-        return
+        print(item)
+        return 
 
     def get(self, key):
         # Insert your code here to get data by key
@@ -56,13 +56,32 @@ class HashTable:
     def __setitem__(self, key, value):
         self.put(key, value)
 
-H = HashTable()
-H[69] = 'A'
-
 # Store remaining input data
+H = HashTable()
+# H.put(69, 'A')
+# H.put(66, 'B')
+# H.put(80, 'C')
+# H.put(35, 'D')
+# H.put(18, 'E')
+# H.put(52, 'F')
+# H.put(89, 'G')
+# H.put(70, 'H')
+# H.put(12, 'I')
+
+H[69] = 'A'
+H[66] = 'B'
+H[80] = 'C'
+H[35] = 'D'
+H[18] = 'E'
+H[52] = 'F'
+H[89] = 'G'
+H[70] = 'H'
+H[12] = 'I'
 
 # print the slot values
-
+# for x in H.slots:
+    # print(x.value)
 # print the data values
 
 # print the value for key 52
+print(H.get(52))
