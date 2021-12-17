@@ -46,6 +46,8 @@ def dijsktra(graph, initial, end):
     shortest_paths = {initial: (None, 0)}
     current_node = initial
     visited = set()
+    # define a variable to hold the cost of the path
+    cost = 0
     while current_node != end:
         visited.add(current_node)
         destinations = graph[current_node]
@@ -64,13 +66,15 @@ def dijsktra(graph, initial, end):
         # next node is the destination with the lowest weight
         current_node = min(next_destinations,key=lambda k: next_destinations[k][1])
     # Work back through destinations in shortest path
-    path = []
+    path = []  
+    # store the cost of the path in the variable
+    cost = shortest_paths[current_node][1]
     while current_node is not None:
         path.append(current_node)
         next_node = shortest_paths[current_node][0]
         current_node = next_node        
     # Reverse path
     path = path[::-1]
-    
-    return path
-print("Cheapest path between A and H is: " + str(dijsktra(graph, "A", "H")))
+    # return the variable
+    return print("Cheapest path between A and H is: " + str(path) + "\nThe path cost between A and H is: " + str(cost))
+dijsktra(graph, "A", "H")
