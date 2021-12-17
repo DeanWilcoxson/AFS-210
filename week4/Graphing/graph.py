@@ -9,8 +9,6 @@ graph["G"] = {"F": 1, "H": 6}
 graph["H"] = {"F": 9, "G": 8}
 graph["I"] = {}
 # finds shortest path between 2 nodes of a graph using BFS
-
-
 def breadth_first_search(graph, start, goal):
     # keep track of explored nodes
     explored = []
@@ -40,16 +38,12 @@ def breadth_first_search(graph, start, goal):
             explored.append(node)
     # in case there's no path between the 2 nodes
     return "Route Not Possible"
-
-
-print(breadth_first_search(graph, "A", "H"))
-
+print("Shortest path between A and H is: " + str(breadth_first_search(graph, "A", "H")))
 
 def dijsktra(graph, initial, end):
     # shortest paths is a dict of nodes
     # whose value is a tuple of (previous node, weight)
     shortest_paths = {initial: (None, 0)}
-    pathCost = 0
     current_node = initial
     visited = set()
     while current_node != end:
@@ -58,33 +52,25 @@ def dijsktra(graph, initial, end):
         weight_to_current_node = shortest_paths[current_node][1]
         for next_node in destinations:
             weight = graph[current_node][next_node] + weight_to_current_node
-            if weight:
-                pathCost += weight
-                return pathCost
             if next_node not in shortest_paths:
                 shortest_paths[next_node] = (current_node, weight)
             else:
                 current_shortest_weight = shortest_paths[next_node][1]
                 if current_shortest_weight > weight:
                     shortest_paths[next_node] = (current_node, weight)
-
-        next_destinations = {
-            node: shortest_paths[node] for node in shortest_paths if node not in visited}
+        next_destinations = {node: shortest_paths[node] for node in shortest_paths if node not in visited}
         if not next_destinations:
             return "Route Not Possible"
         # next node is the destination with the lowest weight
-        current_node = min(next_destinations,
-                           key=lambda k: next_destinations[k][1])
-
+        current_node = min(next_destinations,key=lambda k: next_destinations[k][1])
     # Work back through destinations in shortest path
     path = []
     while current_node is not None:
         path.append(current_node)
         next_node = shortest_paths[current_node][0]
-        current_node = next_node
+        current_node = next_node        
     # Reverse path
     path = path[::-1]
-    return (path, pathCost)
-
-
-print(dijsktra(graph, "A", "H"))
+    
+    return path
+print("Cheapest path between A and H is: " + str(dijsktra(graph, "A", "H")))
