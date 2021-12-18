@@ -11,21 +11,11 @@ class HashTable:
 
     def _hash(self, key):
         # Insert your hashing function code
-        keystr = str(key)
-        hashValue = 0
-        for character in keystr:
-            hashValue += ord(character)
-        return (hashValue*len(keystr)) % self.size
+        return key % self.size
 
     def _rehash(self, key):
         # Insert your secondary hashing function code
-        keystr = str(key)
-        multiplier = 1
-        hashValue = 0
-        for character in keystr:
-            hashValue += multiplier * ord(character)
-            multiplier += 1
-        return (hashValue*len(keystr)) % self.size
+        return key // self.size
 
     def put(self, key, value):
         # Insert your code here to store key and data
@@ -58,30 +48,28 @@ class HashTable:
 
 # Store remaining input data
 H = HashTable()
-# H.put(69, 'A')
-# H.put(66, 'B')
-# H.put(80, 'C')
-# H.put(35, 'D')
-# H.put(18, 'E')
-# H.put(52, 'F')
-# H.put(89, 'G')
-# H.put(70, 'H')
-# H.put(12, 'I')
+H.__setitem__(69, 'A')
+H.__setitem__(66, 'B')
+H.__setitem__(80, 'C')
+H.__setitem__(35, 'D')
+H.__setitem__(18, 'E')
+H.__setitem__(52, 'F')
+H.__setitem__(89, 'G')
+H.__setitem__(70, 'H')
+H.__setitem__(12, 'I')
 
-H[69] = 'A'
-H[66] = 'B'
-H[80] = 'C'
-H[35] = 'D'
-H[18] = 'E'
-H[52] = 'F'
-H[89] = 'G'
-H[70] = 'H'
-H[12] = 'I'
 
 # print the slot values
-# for x in H.slots:
-    # print(x.value)
-# print the data values
 
 # print the value for key 52
-print(H.get(52))
+print(H.__getitem__(69))
+print(H._hash(69))
+print(H.__getitem__(66))
+print(H.__getitem__(80))
+print(H.__getitem__(35))
+print(H.__getitem__(18))
+print(H.__getitem__(52))
+print(H.__getitem__(89))
+print(H.__getitem__(70))
+print(H.__getitem__(12))
+
