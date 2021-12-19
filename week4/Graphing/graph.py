@@ -76,5 +76,7 @@ def dijsktra(graph, initial, end):
     # Reverse path
     path = path[::-1]
     # return the variable
-    return print("Cheapest path between A and H is: " + str(path) + "\nThe path cost between A and H is: " + str(cost))
-dijsktra(graph, "A", "H")
+    return path, cost
+dpath, dcost = dijsktra(graph, "A", "H")
+print("Cheapest path between A and H is: ", dpath)
+print("The path cost between A and H is: ", dcost)
