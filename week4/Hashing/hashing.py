@@ -37,10 +37,20 @@ class HashTable:
 
     def get(self, key):
         h_value = self._hash(key)
-        return self.data[h_value]
+        if(self.slots[h_value] == key):
+            return self.data[h_value]
+        else:
+            self._rehash(h_value)
+            if(self.slots[h_value] == key):
+                return self.data[h_value]
+            else:
+                return None
+            
+            
 
     def __getitem__(self, key):
         return self.get(key)
+
 
 # Store remaining input data
 H = HashTable()
@@ -59,3 +69,5 @@ print(H.keys())
 print(H.values())
 # print the value for key 52
 print(H[52])
+print(H[80])
+print(H[70])
