@@ -40,7 +40,7 @@ class HashTable:
         if(self.slots[h_value] == key):
             return self.data[h_value]
         else:
-            self._rehash(h_value)
+            h_value = self._rehash(key)
             if(self.slots[h_value] == key):
                 return self.data[h_value]
             else:
