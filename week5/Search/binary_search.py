@@ -1,9 +1,9 @@
 def recursive_BS(list, value, start=0, end=None):
-    mid = (start + end) // 2
     if end is None:
         end = len(list) - 1
     if start > end:
         return False
+    mid = (start + end) // 2
     if value == list[mid]:
         return True
     if value < list[mid]:
