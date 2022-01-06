@@ -5,9 +5,9 @@ def shuffle(list, n):
     elif len(list) < 2 and len(list) > 0:
         return list
     elif len(list) >= 2:
-        for i in range(n-1,0,-1):
-            j = random.randint(0, i+1)
-            list[i],list[j] = list[j],list[i]
+        for index in range(n-1,0,-1):
+            randIndex = random.randint(0, index+1)
+            list[index],list[randIndex] = list[randIndex],list[index]
         return list
         
 sampleInput = [7, 20, 26, 31, 40, 51, 55, 63, 74, 81]
