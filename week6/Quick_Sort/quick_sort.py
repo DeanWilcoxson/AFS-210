@@ -10,11 +10,11 @@ def quick_sort(a_list, start, end):
     # divided between a pivot point
     # pivot = partitionStart(a_list, start, end)
     # 1
-    # pivot = partitionEnd(a_list, start, end)
+    pivot = partitionEnd(a_list, start, end)
     # 2
     # pivot = partitionMiddle(a_list, start, end)
     # 3
-    pivot = partitionRandom(a_list, start, end)
+    # pivot = partitionRandom(a_list, start, end)
     
     quick_sort(a_list, start, pivot-1)
     quick_sort(a_list, pivot+1, end)
