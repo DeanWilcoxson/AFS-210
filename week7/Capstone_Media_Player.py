@@ -1,3 +1,4 @@
+from playsound import playsound
 class NewDoubleEndedQueue():
     def __init__(self):
         self.items = []
@@ -43,7 +44,6 @@ class NewDoubleEndedQueue():
 
     def sort(self):
         self.items.sort()
-
 class Song:
     def __init__(self, title, artist):
         self.title = title
@@ -69,7 +69,6 @@ class Song:
 
     def __gt__(self, other):
         return ((self.title, self.artist) < (other.title, other.artist))
-
 class mediaPlayer():
     def __init__(self):
         self.playlist = NewDoubleEndedQueue()
@@ -104,33 +103,38 @@ class mediaPlayer():
     def playSong(self):
         # Play the playlist from the beginning
         print("Playing....")
+        playsound("C:\\Users\\Gainious\\Dev\\media_files\\Guile's Theme.mp3")
         # Display song name that is currently playing
         return
-        """"""
+    """"""
 
     def skipSong(self):
         # Skip to the next song on the playlist
         print("Skipping....")
         # Display song name that is now playing
         pass
-        """"""
+    """"""
 
     def prevSong(self):
         # Go back to the previous song on the playlist
         print("Replaying....")
         # Display song name that is now playing
         pass
-        """"""
+    """"""
 
     def shuffle(self):
-        print("Shuffling....")
-        self.playlist.rotate()
-        self.displayPlaylist()
+        if len(self.playlist.items):
+            print("Shuffling....")
+            self.playlist.rotate()
+            self.displayPlaylist()
+        else:
+            print("There are no songs in your playlist yet.")
     """The Shuffle Function calls the rotate method of the deque class which splices the list by three on both sides and swapping the values."""
 
     def sortPlaylist(self):
         # Sort playlist by Title(alphabetically)
         if len(self.playlist.items):
+            print("Sorting by title....")
             self.playlist.sort()
             self.displayPlaylist()
         else:
@@ -155,7 +159,6 @@ class mediaPlayer():
         else:
             print("There are no songs in your playlist yet.")
     """The Display function loops through and prints each song in the current playlist order."""
-
 player = mediaPlayer()
 
 def menu():
