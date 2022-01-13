@@ -1,4 +1,5 @@
-from playsound import playsound
+# from playsound import playsound
+import random
 class NewDoubleEndedQueue():
     def __init__(self):
         self.items = []
@@ -38,9 +39,16 @@ class NewDoubleEndedQueue():
         self.items.reverse()
 
     def rotate(self):
-        self.items = self.items[len(self.items)//3:] + \
-            self.items[:len(self.items)//3]
-        return self.items
+        list = self.items
+        if len(list) <= 0:
+            return None
+        elif len(list) == 1:
+            return list
+        else:
+            for index in range(len(list)-1, 0, -1):
+                randIndex = random.randint(0, index)
+                list[index], list[randIndex] = list[randIndex], list[index]
+            return list
 
     def sort(self):
         self.items.sort()
@@ -69,6 +77,8 @@ class Song:
 
     def __gt__(self, other):
         return ((self.title, self.artist) < (other.title, other.artist))
+
+
 class mediaPlayer():
     def __init__(self):
         self.playlist = NewDoubleEndedQueue()
@@ -89,12 +99,12 @@ class mediaPlayer():
             count = 0
             # display songs with index position in front
             for i in self.playlist:
-                print(count, ":", i)
+                print(count+1, ":", i)
                 count += 1
             # Prompt user for Song Index
             index = int(input("Remove which track: "))
             # remove song from playlist
-            self.playlist.removeAtIndex(index)
+            self.playlist.removeAtIndex(index-1)
             print("Song Removed from Playlist")
         else:
             print("There are no songs in your playlist yet.")
@@ -103,7 +113,7 @@ class mediaPlayer():
     def playSong(self):
         # Play the playlist from the beginning
         print("Playing....")
-        playsound("C:\\Users\\Gainious\\Dev\\media_files\\Guile's Theme.mp3")
+        # playsound("C:\\Users\\Gainious\\Dev\\media_files\\Guile's Theme.mp3")
         # Display song name that is currently playing
         return
     """"""
@@ -152,14 +162,19 @@ class mediaPlayer():
 
     def displayPlaylist(self):
         if len(self.playlist.items):
+            count = 0
             # Show the current song list order
             print("\nSong list:\n")
             for song in self.playlist:
-                print(song)
+                count += 1
+                print(count, ":", song)
         else:
             print("There are no songs in your playlist yet.")
     """The Display function loops through and prints each song in the current playlist order."""
+
+
 player = mediaPlayer()
+
 
 def menu():
     print(20 * "-", "MENU", 20 * "-")
@@ -174,6 +189,7 @@ def menu():
     print("9. Show Current Playlist Order")
     print("0. Exit")
     print(46 * "-")
+
 
 while True:
     menu()
