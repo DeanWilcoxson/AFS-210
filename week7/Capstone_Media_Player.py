@@ -78,7 +78,6 @@ class Song:
     def __gt__(self, other):
         return ((self.title, self.artist) < (other.title, other.artist))
 
-
 class mediaPlayer():
     def __init__(self):
         self.playlist = NewDoubleEndedQueue()
@@ -172,9 +171,7 @@ class mediaPlayer():
             print("There are no songs in your playlist yet.")
     """The Display function loops through and prints each song in the current playlist order."""
 
-
 player = mediaPlayer()
-
 
 def menu():
     print(20 * "-", "MENU", 20 * "-")
@@ -189,7 +186,6 @@ def menu():
     print("9. Show Current Playlist Order")
     print("0. Exit")
     print(46 * "-")
-
 
 while True:
     menu()
