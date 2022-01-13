@@ -1,0 +1,13 @@
+items.addFirst("May")
+# items.add("the")
+# items.add("Force")
+# items.add("be")
+# items.add("with")
+# items.add("you")
+# items.add("!")
+# print(items.indexOf("with"))
+# items.addAtIndex("all", items.indexOf("!"))
+# items.replace("us", "you")
+# print(items)
+
+# print(items.indexOf("blah"))
