@@ -40,16 +40,15 @@ class NewDoubleEndedQueue():
         self.items.reverse()
 
     def shuffle(self):
-        list = self.items
-        if len(list) <= 0:
+        if len(self.items) <= 0:
             return None
-        elif len(list) == 1:
-            return list
+        elif len(self.items) == 1:
+            return self.items
         else:
-            for index in range(len(list)-1, 0, -1):
+            for index in range(len(self.items)-1, 0, -1):
                 randIndex = random.randint(0, index)
-                list[index], list[randIndex] = list[randIndex], list[index]
-            return list
+                self.items[index], self.items[randIndex] = self.items[randIndex], self.items[index]
+            return self.items
 
     def rotate(self, n):
         if len(self.items) <= 0:
