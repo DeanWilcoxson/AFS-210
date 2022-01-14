@@ -1,7 +1,4 @@
-# from playsound import playsound
 import random
-
-
 class NewDoubleEndedQueue():
     def __init__(self):
         self.items = []
@@ -75,8 +72,6 @@ class NewDoubleEndedQueue():
 
     def peekAtIndex(self, index):
         return self.items[index]
-
-
 class Song:
     def __init__(self, title, artist):
         self.title = title
@@ -102,14 +97,11 @@ class Song:
 
     def __gt__(self, other):
         return ((self.title, self.artist) < (other.title, other.artist))
-
-
 class mediaPlayer():
     def __init__(self):
         self.playlist = NewDoubleEndedQueue()
         self.playState = False
-        # self.currentSong = -1
-    
+
         # Preloaded Songs
         self.playlist.append(Song("Mockingbird", "Eminem"))
         self.playlist.append(Song("Superman", "Eminem"))
@@ -117,7 +109,8 @@ class mediaPlayer():
         self.playlist.append(Song("Wherever I May Roam", "Metallica"))
         self.playlist.append(Song("Fade to Black", "Metallica"))
         self.playlist.append(Song("My Friend of Misery", "Metallica"))
-        self.playlist.append(Song("Walk A Little Straighter", "Billy Currington"))
+        self.playlist.append(
+            Song("Walk A Little Straighter", "Billy Currington"))
         self.playlist.append(Song("You're Gonna Miss This", "Trace Adkins"))
         self.playlist.append(Song("Ignition", "Downlink"))
         self.playlist.append(Song("Best Of You", "Foo Fighters"))
@@ -127,6 +120,7 @@ class mediaPlayer():
 
     def isPlaying(self):
         return self.playState
+    """The isplaying function returns a boolean value for the attribute playState."""
 
     def addSong(self):
         # Add code to prompt user for Song Title and Artist Name
@@ -157,29 +151,25 @@ class mediaPlayer():
     def playSong(self):
         # Play the playlist from the beginning
         self.playState = True
-        self.currentSong = self.playlist.peek()
         # Display song name that is currently playing
-        print("Playing....", self.currentSong)
-        # playsound("C:\\Users\\Gainious\\Dev\\media_files\\Guile's Theme.mp3")
-    """"""
+        print("Playing....", self.playlist.peek())
+    """The playSong function changes the playState of the application to true and diplays the first item in the list."""
 
     def skipSong(self):
         # Skip to the next song on the playlist
         print("Next....")
         self.playlist.rotate(1)
-        print("Now Playing....", self.playlist.peek())
         # Display song name that is now playing
-        
-    """"""
+        print("Now Playing....", self.playlist.peek())
+    """The skipSong Function calls the rotate function that takes a positive integer value as a parameter and pops off the beginning of the list and makes it the last index."""
 
     def prevSong(self):
         # Go back to the previous song on the playlist
         print("Previous....")
         self.playlist.rotate(-1)
-        print("Now Playing....", self.playlist.peek())
         # Display song name that is now playing
-        pass
-    """"""
+        print("Now Playing....", self.playlist.peek())
+    """The prevSong Function calls the rotate function that takes a negative integer value as a parameter and pops off the end of the list and makes it the first index."""
 
     def shuffle(self):
         if len(self.playlist.items):
@@ -229,15 +219,15 @@ player = mediaPlayer()
 
 def menu():
     print(20 * "-", "MENU", 20 * "-")
-    print("1. Add Song to Playlist")
-    print("2. Remove song from Playlist")
+    print("1. Add a Song")
+    print("2. Remove a song")
     print("3. Play")
-    print("4. Skip")
-    print("5. Go Back")
+    print("4. Skip Song")
+    print("5. Previous Song")
     print("6. Shuffle")
     print("7. Sort")
-    print("8. Show Currently Playing Song")
-    print("9. Show Current Playlist Order")
+    print("8. Current Song")
+    print("9. Playlist Order")
     print("0. Exit")
     print(46 * "-")
 
@@ -254,18 +244,12 @@ while True:
     elif choice == 3:
         # Play the playlist from the beginning
         player.playSong()
-        # Display song name that is currently playing
-
     elif choice == 4:
         # Skip to the next song on the playlist
         player.skipSong()
-        # Display song name that is now playing
-
     elif choice == 5:
         # Go back to the previous song on the playlist
         player.prevSong()
-        # Display song name that is now playing
-
     elif choice == 6:
         # Randomly shuffle the playlist and play the first song
         player.shuffle()
