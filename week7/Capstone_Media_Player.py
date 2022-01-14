@@ -1,5 +1,7 @@
 # from playsound import playsound
 import random
+
+
 class NewDoubleEndedQueue():
     def __init__(self):
         self.items = []
@@ -38,7 +40,7 @@ class NewDoubleEndedQueue():
     def reverse(self):
         self.items.reverse()
 
-    def rotate(self):
+    def shuffle(self):
         list = self.items
         if len(list) <= 0:
             return None
@@ -50,8 +52,31 @@ class NewDoubleEndedQueue():
                 list[index], list[randIndex] = list[randIndex], list[index]
             return list
 
+    def rotate(self, n):
+        if len(self.items) <= 0:
+            return None
+        elif len(self.items) == 1:
+            return self.items
+        else:
+            if n > 0:
+                for _ in range(n):
+                    this = self.pop()
+                    self.appendLeft(this)
+            elif n < 0:
+                for _ in range(n):
+                    that = self.popLeft()
+                    self.append(that)
+
     def sort(self):
         self.items.sort()
+
+    def peek(self):
+        return self.items[0]
+
+    def peekAtIndex(self, index):
+        return self.items[index]
+
+
 class Song:
     def __init__(self, title, artist):
         self.title = title
@@ -78,10 +103,30 @@ class Song:
     def __gt__(self, other):
         return ((self.title, self.artist) < (other.title, other.artist))
 
+
 class mediaPlayer():
     def __init__(self):
         self.playlist = NewDoubleEndedQueue()
-    """self.playlist is pointing to the deque as its abstract data structure (Built upon a list)"""
+        self.playState = False
+        # self.currentSong = -1
+    
+        # Preloaded Songs
+        self.playlist.append(Song("Mockingbird", "Eminem"))
+        self.playlist.append(Song("Superman", "Eminem"))
+        self.playlist.append(Song("Criminal", "Eminem"))
+        self.playlist.append(Song("Wherever I May Roam", "Metallica"))
+        self.playlist.append(Song("Fade to Black", "Metallica"))
+        self.playlist.append(Song("My Friend of Misery", "Metallica"))
+        self.playlist.append(Song("Walk A Little Straighter", "Billy Currington"))
+        self.playlist.append(Song("You're Gonna Miss This", "Trace Adkins"))
+        self.playlist.append(Song("Ignition", "Downlink"))
+        self.playlist.append(Song("Best Of You", "Foo Fighters"))
+    """self.playlist is pointing to the deque as its abstract data structure (Built upon a list). 
+       self.playstate is a boolean value to determine whether the media player is 'playing' a song or not.
+    """
+
+    def isPlaying(self):
+        return self.playState
 
     def addSong(self):
         # Add code to prompt user for Song Title and Artist Name
@@ -111,22 +156,27 @@ class mediaPlayer():
 
     def playSong(self):
         # Play the playlist from the beginning
-        print("Playing....")
-        # playsound("C:\\Users\\Gainious\\Dev\\media_files\\Guile's Theme.mp3")
+        self.playState = True
+        self.currentSong = self.playlist.peek()
         # Display song name that is currently playing
-        return
+        print("Playing....", self.currentSong)
+        # playsound("C:\\Users\\Gainious\\Dev\\media_files\\Guile's Theme.mp3")
     """"""
 
     def skipSong(self):
         # Skip to the next song on the playlist
-        print("Skipping....")
+        print("Next....")
+        self.playlist.rotate(1)
+        print("Now Playing....", self.playlist.peek())
         # Display song name that is now playing
-        pass
+        
     """"""
 
     def prevSong(self):
         # Go back to the previous song on the playlist
-        print("Replaying....")
+        print("Previous....")
+        self.playlist.rotate(-1)
+        print("Now Playing....", self.playlist.peek())
         # Display song name that is now playing
         pass
     """"""
@@ -134,7 +184,7 @@ class mediaPlayer():
     def shuffle(self):
         if len(self.playlist.items):
             print("Shuffling....")
-            self.playlist.rotate()
+            self.playlist.shuffle()
             self.displayPlaylist()
         else:
             print("There are no songs in your playlist yet.")
@@ -153,11 +203,13 @@ class mediaPlayer():
     def currentlyPlaying(self):
         # Display the song name and artist of the currently playing song
         if len(self.playlist.items):
-            for i in self.playlist:
-                print("Currently playing: ", i, end="")
+            if self.isPlaying():
+                print(self.playlist.peek())
+            else:
+                print("No song currently playing.")
         else:
             print("There are no songs in your playlist yet.")
-    """"""
+    """The currently playing function calls two functions, isPlaying, and peek. It calls the isPlaying function to check the playState of the mediaPlayer. It calls the peek method of the deque to receive the first item in the deque. Currently playing will always be the 0 index in a deque"""
 
     def displayPlaylist(self):
         if len(self.playlist.items):
@@ -171,7 +223,9 @@ class mediaPlayer():
             print("There are no songs in your playlist yet.")
     """The Display function loops through and prints each song in the current playlist order."""
 
+
 player = mediaPlayer()
+
 
 def menu():
     print(20 * "-", "MENU", 20 * "-")
@@ -186,6 +240,7 @@ def menu():
     print("9. Show Current Playlist Order")
     print("0. Exit")
     print(46 * "-")
+
 
 while True:
     menu()
