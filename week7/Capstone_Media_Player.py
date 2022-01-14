@@ -165,6 +165,7 @@ class mediaPlayer():
     """The playSong function changes the playState of the application to true and diplays the first item in the list."""
 
     def skipSong(self):
+        # returns None as the value for the self.playlist.peek()
         # Skip to the next song on the playlist
         print("Next....")
         self.playlist.rotate(1)
@@ -173,6 +174,7 @@ class mediaPlayer():
     """The skipSong Function calls the rotate function that takes a positive integer value as a parameter and pops off the beginning of the list and makes it the last index."""
 
     def prevSong(self):
+        # returns None as the value for the self.playlist.peek()
         # Go back to the previous song on the playlist
         print("Previous....")
         self.playlist.rotate(-1)
