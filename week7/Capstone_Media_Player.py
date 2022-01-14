@@ -1,4 +1,6 @@
 import random
+
+
 class NewDoubleEndedQueue():
     def __init__(self):
         self.items = []
@@ -72,6 +74,8 @@ class NewDoubleEndedQueue():
 
     def peekAtIndex(self, index):
         return self.items[index]
+
+
 class Song:
     def __init__(self, title, artist):
         self.title = title
@@ -97,6 +101,8 @@ class Song:
 
     def __gt__(self, other):
         return ((self.title, self.artist) < (other.title, other.artist))
+
+
 class mediaPlayer():
     def __init__(self):
         self.playlist = NewDoubleEndedQueue()
@@ -121,6 +127,11 @@ class mediaPlayer():
     def isPlaying(self):
         return self.playState
     """The isplaying function returns a boolean value for the attribute playState."""
+
+    def stopPlaying(self):
+        self.playState = False
+        print("Stopped....")
+    """The stopPlaying function changes the boolean value of playstate and that stops the player from 'playing'."""
 
     def addSong(self):
         # Add code to prompt user for Song Title and Artist Name
@@ -262,6 +273,9 @@ while True:
     elif choice == 9:
         # Display the current order of the playlist
         player.displayPlaylist()
+    elif choice == 10:
+        player.stopPlaying()
+        player.isPlaying()
     elif choice == 0:
         print("Goodbye.")
         break
