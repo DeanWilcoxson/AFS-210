@@ -1,6 +1,5 @@
 import random
 
-
 class NewDoubleEndedQueue():
     def __init__(self):
         self.items = []
@@ -67,6 +66,9 @@ class NewDoubleEndedQueue():
 
     def sort(self):
         self.items.sort()
+
+    def sortByArtist(self):
+        self.items.sort(key=myFunc)
 
     def peek(self):
         return self.items[0]
@@ -190,7 +192,7 @@ class mediaPlayer():
             print("There are no songs in your playlist yet.")
     """The Shuffle Function calls the rotate method of the deque class which splices the list by three on both sides and swapping the values."""
 
-    def sortPlaylist(self):
+    def sortPlaylistByTitle(self):
         # Sort playlist by Title(alphabetically)
         if len(self.playlist.items):
             print("Sorting by title....")
@@ -199,6 +201,16 @@ class mediaPlayer():
         else:
             print("There are no songs in your playlist yet.")
     """The Sort Playlist Function uses the built in sort method for lists"""
+
+    # def sortPlaylistByArtist(self):
+    #     # Sort playlist by Title(alphabetically)
+    #     if len(self.playlist.items):
+    #         print("Sorting by title....")
+    #         self.playlist.sortByArtist()
+    #         self.displayPlaylist()
+    #     else:
+    #         print("There are no songs in your playlist yet.")
+    # """The Sort Playlist Function uses the built in sort method for lists with a key function that uses the 'artist' as the sort comparison"""
 
     def currentlyPlaying(self):
         # Display the song name and artist of the currently playing song
@@ -232,12 +244,14 @@ def menu():
     print("1. Add a Song")
     print("2. Remove a song")
     print("3. Play")
-    print("4. Skip Song")
-    print("5. Previous Song")
-    print("6. Shuffle")
-    print("7. Sort")
-    print("8. Current Song")
-    print("9. Playlist Order")
+    print("4. Stop")
+    print("5. Skip Song")
+    print("6. Previous Song")
+    print("7. Shuffle")
+    print("8. SortByTitle")
+    # print("9. SortByArtist")
+    print("9. Current Song")
+    print("10. Playlist Order")
     print("0. Exit")
     print(46 * "-")
 
@@ -255,26 +269,28 @@ while True:
         # Play the playlist from the beginning
         player.playSong()
     elif choice == 4:
-        # Skip to the next song on the playlist
-        player.skipSong()
-    elif choice == 5:
-        # Go back to the previous song on the playlist
-        player.prevSong()
-    elif choice == 6:
-        # Randomly shuffle the playlist and play the first song
-        player.shuffle()
-    elif choice == 7:
-        # Sort the playlist alphabetically by the title
-        player.sortPlaylist()
-    elif choice == 8:
-        # Display the song name and artist of the currently playing song
-        player.currentlyPlaying()
-    elif choice == 9:
-        # Display the current order of the playlist
-        player.displayPlaylist()
-    elif choice == 10:
         player.stopPlaying()
         player.isPlaying()
+    elif choice == 5:
+        # Skip to the next song on the playlist
+        player.skipSong()
+    elif choice == 6:
+        # Go back to the previous song on the playlist
+        player.prevSong()
+    elif choice == 7:
+        # Randomly shuffle the playlist and play the first song
+        player.shuffle()
+    elif choice == 8:
+        # Sort the playlist alphabetically by the title
+        player.sortPlaylistByTitle()
+    # elif choice == 9:
+    #     player.sortPlaylistByArtist()
+    elif choice == 9:
+        # Display the song name and artist of the currently playing song
+        player.currentlyPlaying()
+    elif choice == 10:
+        # Display the current order of the playlist
+        player.displayPlaylist()
     elif choice == 0:
         print("Goodbye.")
         break
