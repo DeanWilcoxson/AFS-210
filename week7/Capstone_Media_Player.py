@@ -135,12 +135,10 @@ class mediaPlayer():
 
     def addSong(self):
         # Add code to prompt user for Song Title and Artist Name
-        songName = input("Song Title: ")
-        songArtist = input("Artist Name: ")
-        song = Song(songName, songArtist)
+        song = Song(input("Song Title: "), input("Artist Name: "))
         # Add song to playlist
         self.playlist.append(song)
-        print("Song Added to Playlist")
+        print(f"{song} Added to Playlist")
     """The addSong function creates a song object with the values of the users inputs. It sends them through the Song class and appends the returned object to the playlist"""
 
     def removeSong(self):
