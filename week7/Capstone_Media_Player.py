@@ -60,7 +60,7 @@ class NewDoubleEndedQueue():
                 for _ in range(n):
                     self.appendLeft(self.pop())
             elif n < 0:
-                for _ in range(n):
+                for _ in range(abs(n)):
                     self.append(self.popLeft())
 
     def sort(self):
