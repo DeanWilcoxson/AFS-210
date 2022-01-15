@@ -28,10 +28,10 @@ class NewDoubleEndedQueue():
         self.items.insert(index, item)
 
     def pop(self):
-        self.items.pop()
+        return self.items.pop()
 
     def popLeft(self):
-        self.items.pop(0)
+        return self.items.pop(0)
 
     def removeAtIndex(self, index):
         self.items.pop(index)
@@ -58,12 +58,10 @@ class NewDoubleEndedQueue():
         else:
             if n > 0:
                 for _ in range(n):
-                    this = self.pop()
-                    self.appendLeft(this)
+                    self.appendLeft(self.pop())
             elif n < 0:
                 for _ in range(n):
-                    that = self.popLeft()
-                    self.append(that)
+                    self.append(self.popLeft())
 
     def sort(self):
         self.items.sort()
@@ -127,8 +125,11 @@ class mediaPlayer():
     """The isplaying function returns a boolean value for the attribute playState."""
 
     def stopPlaying(self):
-        self.playState = False
-        print("Stopped....")
+        if self.playState == True:
+            print("Stopped....")
+            self.playState = False
+        else:
+            print("No song currently playing.")
     """The stopPlaying function changes the boolean value of playstate and that stops the player from 'playing'."""
 
     def addSong(self):
@@ -255,6 +256,7 @@ while True:
         # Play the playlist from the beginning
         player.playSong()
     elif choice == 4:
+        # Stop the playlist from playing
         player.stopPlaying()
         player.isPlaying()
     elif choice == 5:
